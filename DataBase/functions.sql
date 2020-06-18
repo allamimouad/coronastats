@@ -6,10 +6,9 @@ is
 begin
    
    open cur for
-      SELECT * 
-        FROM TABLE( SELECT c_corona_cases 
-                    FROM TABLE( SELECT c_cities FROM region ) 
-                    WHERE c_name = city_name );
+    SELECT co.*
+    FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+    WHERE c.c_name = city_name ;
 
    return cur;
 end ;
