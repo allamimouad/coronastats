@@ -15,7 +15,7 @@ CREATE OR REPLACE TYPE city AS OBJECT (
 CREATE OR REPLACE TYPE nt_city AS TABLE OF city;
 
 CREATE TABLE region (
-  c_name   VARCHAR2(25),
+  c_name   VARCHAR2(50),
   c_cities     nt_city)
   NESTED TABLE c_cities STORE AS cities_tab
    (NESTED TABLE c_corona_cases STORE AS corona_cases_tab);
