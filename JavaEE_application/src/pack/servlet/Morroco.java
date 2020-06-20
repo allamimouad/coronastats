@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pack.beans.Corona_case;
+import pack.beans.Statistic;
 import pack.db.DB_Managment;
 
 
@@ -29,10 +30,14 @@ public class Morroco extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//List<Corona_case> corona_cases = DB_Managment.city_show("Oujda-Angad");
 		
-		//List<Corona_case> corona_cases = DB_Managment.city_show("El Jadida");
+		// for the main graph
+		List<Corona_case> corona_cases = DB_Managment.region_show("Tanger – Tétouan – Al Hoceima");
 		
-		List<Corona_case> corona_cases = DB_Managment.region_show(null);
+		// for the right bar graph
+		Statistic morroco_statistic = DB_Managment.morroco_statistics();
+		request.setAttribute("morroco_statistic", morroco_statistic);
 		
 		request.setAttribute("corona_cases", corona_cases);
 		

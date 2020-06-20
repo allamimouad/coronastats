@@ -10,7 +10,7 @@
 </head>
 <body>
 
-${ c_c.c_date.year }
+c_confirmed : ${ morroco_statistic.c_confirmed } c_deaths : ${ morroco_statistic.c_deaths } c_recovered : ${ morroco_statistic.c_recovered }
 
 	<c:forEach items="${ corona_cases }" var="corona_case">
 	=====================================================

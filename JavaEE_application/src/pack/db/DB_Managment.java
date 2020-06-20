@@ -14,6 +14,7 @@ import java.util.List;
 
 import oracle.jdbc.OracleTypes;
 import pack.beans.Corona_case;
+import pack.beans.Statistic;
 
 public class DB_Managment {
 	
@@ -205,6 +206,67 @@ public class DB_Managment {
 		return corona_cases;
 	}
 	
+	
+	//  ===============================================================================================================
+	
+	// return corona statistic of morroco
+	
+public static Statistic morroco_statistics() {
+		
+		
+	    int v_confirmed = 0 ;
+	    int v_deaths = 0 ;
+	    int v_recovered = 0 ;
+	    
+	    int seck_now = 0;
+	    
+	    Statistic morroco_statistic = null ;
+		
+	    try {
+			
+			CallableStatement cstmt;
+			cstmt = conn.prepareCall("{? = call morroco_statistic()}");
+			cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+	        cstmt.executeUpdate();
+	        
+	        ResultSet cursor = (ResultSet) cstmt.getObject(1);
+	        
+	        while(cursor.next()) {
+
+	        	
+	        	v_confirmed = ((BigDecimal)cursor.getObject(1)).intValue();
+	        	v_deaths = ((BigDecimal)cursor.getObject(2)).intValue();
+	        	v_recovered = ((BigDecimal)cursor.getObject(3)).intValue();
+	        	
+	        	
+	        	v_deaths = death_rate(v_confirmed,v_deaths,v_recovered);
+	        	v_recovered = recovery_rate(v_confirmed,v_deaths,v_recovered);
+	        	seck_now = 100 - ( v_deaths + v_recovered );
+	        	
+	        	morroco_statistic = new Statistic(seck_now,v_deaths,v_recovered);
+	        	
+	        }
+        
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+    
+	return morroco_statistic;
+	
+	}
+
+
+	private static int death_rate(int total_confirmed,int total_deaths,int total_recovered) {
+		
+		return ( total_deaths * 100 ) / total_confirmed;
+		
+	}
+	
+	private static int recovery_rate(int total_confirmed,int total_deaths,int total_recovered) {
+		
+		return ( total_recovered * 100 ) / total_confirmed;
+	}
 	
 
 }

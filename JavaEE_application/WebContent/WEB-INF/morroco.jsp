@@ -238,14 +238,14 @@
   <script src="libb/jquery/jquery.min.js"></script>
 
   <script src="libb/bootstrap/js/bootstrap.min.js"></script>
-  <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
+  <script class="include" type="text/javascript" src="libb/jquery.dcjqaccordion.2.7.js"></script>
   <script src="libb/jquery.scrollTo.min.js"></script>
   <script src="libb/jquery.nicescroll.js" type="text/javascript"></script>
   <script src="libb/jquery.sparkline.js"></script>
   <!--common script for all pages-->
   <script src="libb/common-scripts.js"></script>
-  <script type="text/javascript" src="lib/gritter/js/jquery.gritter.js"></script>
-  <script type="text/javascript" src="lib/gritter-conf.js"></script>
+  <script type="text/javascript" src="libb/gritter/js/jquery.gritter.js"></script>
+  <script type="text/javascript" src="libb/gritter-conf.js"></script>
   <!--script for this page-->
   <script src="libb/sparkline-chart.js"></script>
   <script src="libb/zabuto_calendar.js"></script>

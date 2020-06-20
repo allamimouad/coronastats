@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pack.beans.Corona_case;
+import pack.beans.Statistic;
 import pack.db.DB_Managment;
 
 
@@ -36,16 +37,11 @@ public class City extends HttpServlet {
 		
 		List<Corona_case> corona_cases = DB_Managment.city_show("El Jadida");
 		
-		Corona_case c_c = corona_cases.get(0);
-		
-		
-		
-		request.setAttribute("c_c", c_c);
-		
-//		request.setAttribute("month", month);
-//		request.setAttribute("day", day);
+		Statistic morroco_statistic = DB_Managment.morroco_statistics();
+		request.setAttribute("morroco_statistic", morroco_statistic);
 		
 		request.setAttribute("corona_cases", corona_cases);
+		
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/city.jsp").forward( request , response );
 	}

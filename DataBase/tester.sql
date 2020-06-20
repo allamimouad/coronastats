@@ -104,16 +104,16 @@ BEGIN
    
    --c_city_info := show_region(); 
    
-   c_city_info := morroco_statistic();
+   --c_city_info := morroco_statistic();
    
-   
+   /*
    LOOP
         FETCH c_city_info INTO v_statistic;
         EXIT WHEN c_city_info%notfound;
         --dbms_output.put_line(v_corona_case.c_date || ': ' ||v_corona_case.c_confirmed);
         dbms_output.put_line(v_statistic.c_confirmed || ': ' || v_statistic.c_deaths || ': ' || v_statistic.c_recovered );
     END LOOP;
-   
+   */
    
    /*
    
@@ -125,6 +125,8 @@ BEGIN
    insert_corona_case_to_a_city('El Jadida','15-06-2020',4,22,33);
    
    */
+   
+   insert_corona_case_to_a_city('El Jadida','16-06-2020',200,22,0);
    
 END;
 

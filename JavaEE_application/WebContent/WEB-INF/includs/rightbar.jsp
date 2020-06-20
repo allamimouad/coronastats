@@ -4,20 +4,19 @@
               <h4>COMPLETED ACTIONS & PROGRESS</h4>
               <canvas id="newchart" height="130" width="130"></canvas>
               <script>
-                var doughnutData = [{
-                    value: 50,
-                    color: "#82B1FF",
-                    label: "confirmed"
+                var doughnutData = [
+                  
+                  {
+                    value: ${ morroco_statistic.c_confirmed } ,
+                    color: "#82B1FF"
                   },
                   {
-                    value: 30,
-                    color: "#EF5350",
-                    label: "confirmed"
+                    value: ${ morroco_statistic.c_deaths } ,
+                    color: "#EF5350"
                   },
                   {
-                    value: 20,
-                    color: "#1DE9B6",
-                    label: "confirmed"
+                    value: ${ morroco_statistic.c_recovered } ,
+                    color: "#1DE9B6"
                   }
                 ];
                 var myDoughnut = new Chart(document.getElementById("newchart").getContext("2d")).Doughnut(doughnutData);
@@ -51,8 +50,11 @@
 
                 </style>
 
-
-              <p> <span class="dott66"></span>&nbsp;confirmed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dott67"></span>&nbsp;deaths&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="dott68"></span>&nbsp;recovered  </p>
+              <p> 
+	              <span class="dott66"></span>&nbsp;confirmed&nbsp;${ morroco_statistic.c_confirmed }%&nbsp;&nbsp;&nbsp;&nbsp;
+	              <span class="dott67"></span>&nbsp;deaths&nbsp;${ morroco_statistic.c_deaths }%&nbsp;&nbsp;&nbsp;&nbsp;<br>
+	              <span class="dott68"></span>&nbsp;recovered&nbsp;${ morroco_statistic.c_recovered }%
+              </p>
             </div>
             <!-- RECENT ACTIVITIES SECTION -->
             <h4 class="centered mt">RECENT ACTIVITY</h4>
