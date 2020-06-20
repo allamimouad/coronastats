@@ -10,23 +10,20 @@
 </head>
 <body>
 
-	<%
-		String str = ( String ) request.getAttribute( "str" );
-		
-		out.print(str);
-		
-		/*
-		 while(cursor.next()){
-			out.print("=======================================");
+${ c_c.c_date.year }
 
-			out.print("date : " + cursor.getObject(1).toString());
-			out.print("confirmed : " + cursor.getObject(2).toString());
-			out.print("deaths : " + cursor.getObject(3).toString());
-			out.print("recovered : " + cursor.getObject(4).toString());
-		} 
-		*/
+	<c:forEach items="${ corona_cases }" var="corona_case">
+	=====================================================
+		<p>
+		
+			Date : ${ corona_case.c_date } <br>
+			Confirmed : ${ corona_case.c_confirmed } <br>
+			Deaths : ${ corona_case.c_deaths } <br>
+			Recovered : ${ corona_case.c_recovered } <br>
+		
+		</p>
 	
-	%>
+	</c:forEach>
 
 </body>
 </html>

@@ -1,10 +1,6 @@
 package pack.servlet;
 
 import java.io.IOException;
-import java.util.Date;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,15 +14,15 @@ import pack.db.DB_Managment;
 
 
 
-@WebServlet("/City")
-public class City extends HttpServlet {
+@WebServlet("/Morroco")
+public class Morroco extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 
-    public City() {
+    public Morroco() {
         super();
-        
+
     }
 
 
@@ -34,26 +30,20 @@ public class City extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		List<Corona_case> corona_cases = DB_Managment.city_show("El Jadida");
+		//List<Corona_case> corona_cases = DB_Managment.city_show("El Jadida");
 		
-		Corona_case c_c = corona_cases.get(0);
-		
-		
-		
-		request.setAttribute("c_c", c_c);
-		
-//		request.setAttribute("month", month);
-//		request.setAttribute("day", day);
+		List<Corona_case> corona_cases = DB_Managment.region_show(null);
 		
 		request.setAttribute("corona_cases", corona_cases);
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/city.jsp").forward( request , response );
+
+		this.getServletContext().getRequestDispatcher("/WEB-INF/morroco.jsp").forward( request , response );
 	}
 
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 
