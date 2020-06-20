@@ -17,11 +17,18 @@ import pack.beans.Corona_case;
 
 public class DB_Managment {
 	
-	private static Connection conn = null;
+	private static Connection conn = null; 
+	
+	
+	// we use this static block to get connect to the DataBase only once
 	
 	static { 
 		connect_DB();
     }
+	
+	//  ===============================================================================================================
+	
+	// with this function we connect to the DataBase
 	
 	public static void connect_DB() {
 		
@@ -47,10 +54,16 @@ public class DB_Managment {
 		
 	}
 	
+	
+	//  ===============================================================================================================
+	
+	// return the static variable that we use to connect to the DataBase
+	
 	public static Connection getConn() {
 		return conn;
 	}
 	
+	//  ===============================================================================================================
 	
 	// return corona cases of specific city
 	
@@ -115,11 +128,12 @@ public class DB_Managment {
 	}
 	
 	
+	//  ===============================================================================================================
 	
 	// return corona cases of specific region 
-	// if null is given it will return corona cases of all region ( morroco )
+	// if null is given it will return corona cases of all regions ( morroco )
 	
-public static List region_show(String region_name) {
+	public static List region_show(String region_name) {
 		
 		List<Corona_case> corona_cases = new ArrayList<Corona_case>();
 		

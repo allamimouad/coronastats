@@ -1,5 +1,8 @@
 package pack.types;
 
+
+// we use this custom Data type intead of java.util.Date because it's very simple :)
+
 public class Date {
 	
 	public int year;

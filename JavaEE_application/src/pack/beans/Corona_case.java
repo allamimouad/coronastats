@@ -2,7 +2,7 @@ package pack.beans;
 
 import pack.types.Date;
 
-//import java.util.Date;
+// this class represent corona_cases that exist in tha DataBase
 
 public class Corona_case {
 
