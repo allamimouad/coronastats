@@ -11,7 +11,8 @@ begin
    open cur for
     SELECT co.*
     FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
-    WHERE c.c_name = city_name ;
+    WHERE c.c_name = city_name 
+    ORDER BY co.c_date ASC;
 
    return cur;
 end ;
@@ -30,15 +31,20 @@ begin
     IF region_name = '00default@@' THEN
     
         open cur for
-          SELECT co.*
-          FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co ;
+            SELECT co.c_date , SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered) 
+            FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+            group by co.c_date
+            ORDER BY co.c_date ASC;
       
     ELSE
     
         open cur for
-          SELECT co.*
-          FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
-          WHERE r.c_name = region_name ;
+            SELECT co.c_date , SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered) 
+            FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+            WHERE r.c_name = region_name
+            group by co.c_date
+            ORDER BY co.c_date ASC;
+        
           
     END IF;
         
@@ -65,7 +71,22 @@ BEGIN
 END;
 
 
+-- return a morroco statistic
 
+CREATE OR REPLACE FUNCTION morroco_statistic
+
+   return sys_refcursor
+is
+     
+    cur  sys_refcursor; 
+begin
+   
+        open cur for
+            SELECT SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered) 
+            FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co ;
+
+   return cur;
+end ;
 
 
 
