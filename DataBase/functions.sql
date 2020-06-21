@@ -89,6 +89,59 @@ begin
 end ;
 
 
+-- return names of all regions
+
+CREATE OR REPLACE FUNCTION get_regions
+
+   return sys_refcursor
+is
+     
+    cur  sys_refcursor; 
+begin
+   
+        open cur for
+            SELECT c_name 
+            FROM region r;
+
+   return cur;
+end ;
 
 
+
+-- return statistic of a specific city
+
+CREATE OR REPLACE FUNCTION city_statistic
+
+   return sys_refcursor
+is
+     
+    cur  sys_refcursor; 
+begin
+   
+        open cur for
+            SELECT c.c_name ,SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered)  
+            FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+            group by c.c_name ;
+
+   return cur;
+end ;
+
+
+
+-- return names of all cities
+
+CREATE OR REPLACE FUNCTION get_cities
+
+   return sys_refcursor
+is
+     
+    cur  sys_refcursor; 
+begin
+   
+        open cur for
+            SELECT c.c_name 
+            FROM region r, TABLE(r.c_cities) c;
+
+   return cur;
+end ;
 

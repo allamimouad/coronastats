@@ -35,12 +35,24 @@ public class City extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		List<Corona_case> corona_cases = DB_Managment.city_show("El Jadida");
+		List<Statistic> cities_stats = DB_Managment.cities_statistics();
+		request.setAttribute("cities_stats", cities_stats);
+		
+			// for the right bar graph
 		
 		Statistic morroco_statistic = DB_Managment.morroco_statistics();
 		request.setAttribute("morroco_statistic", morroco_statistic);
+				
+				
+			// for the left menu
 		
-		request.setAttribute("corona_cases", corona_cases);
+		List<String> regions_name = DB_Managment.all_regions();
+		request.setAttribute("regions_name", regions_name);
+		
+		
+		// for the search
+		List<String> cities_name = DB_Managment.all_cities();
+		request.setAttribute("cities_name", cities_name);
 		
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/city.jsp").forward( request , response );

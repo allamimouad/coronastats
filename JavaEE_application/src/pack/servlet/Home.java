@@ -16,33 +16,62 @@ import pack.db.DB_Managment;
 
 
 @WebServlet("/Morroco")
-public class Morroco extends HttpServlet {
+public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 
-    public Morroco() {
+    public Home() {
         super();
 
     }
 
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//List<Corona_case> corona_cases = DB_Managment.city_show("Oujda-Angad");
+		String type = request.getParameter("type");
+		String name = request.getParameter("name") ;
+		
+		List<Corona_case> corona_cases = null;
+		
+		if( type == null || name == null ) {
+			
+			corona_cases = DB_Managment.region_show(null);
+			
+		}
+		else if(type.equals("region")) {
+			
+			
+			corona_cases = DB_Managment.region_show(name);
+			
+		}
+		else if(type.equals("city")) {
+			
+			
+			corona_cases = DB_Managment.city_show(name);
+			
+		}
 		
 		// for the main graph
-		List<Corona_case> corona_cases = DB_Managment.region_show("Tanger – Tétouan – Al Hoceima");
+		
+		request.setAttribute("corona_cases", corona_cases);
+		
 		
 		// for the right bar graph
 		Statistic morroco_statistic = DB_Managment.morroco_statistics();
 		request.setAttribute("morroco_statistic", morroco_statistic);
 		
-		request.setAttribute("corona_cases", corona_cases);
 		
-
-		this.getServletContext().getRequestDispatcher("/WEB-INF/morroco.jsp").forward( request , response );
+		// for the left menu
+		List<String> regions_name = DB_Managment.all_regions();
+		request.setAttribute("regions_name", regions_name);
+		
+		// for the search
+		List<String> cities_name = DB_Managment.all_cities();
+		request.setAttribute("cities_name", cities_name);
+		
+		
+		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward( request , response );
 	}
 
 

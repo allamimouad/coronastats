@@ -15,14 +15,39 @@
 
 
   <servlet>
-    <servlet-name>CC</servlet-name>
+    <servlet-name>City</servlet-name>
     <servlet-class>pack.servlet.City</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>CC</servlet-name>
-    <url-pattern>/CC</url-pattern>
+    <servlet-name>City</servlet-name>
+    <url-pattern>/city</url-pattern>
   </servlet-mapping>
+
+	  <servlet>
+	    <servlet-name>Home</servlet-name>
+	    <servlet-class>pack.servlet.Home</servlet-class>
+	  </servlet>
+	
+	  <servlet-mapping>
+	    <servlet-name>Home</servlet-name>
+	    <url-pattern>/</url-pattern>
+	  </servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>/css/*</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>/img/*</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>default</servlet-name>
+  <url-pattern>/libb/*</url-pattern>
+</servlet-mapping>
 
 
 </web-app>

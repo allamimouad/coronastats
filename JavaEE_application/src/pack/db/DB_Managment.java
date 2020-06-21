@@ -68,7 +68,7 @@ public class DB_Managment {
 	
 	// return corona cases of specific city
 	
-	public static List city_show(String city_name) {
+	public static List<Corona_case> city_show(String city_name) {
 		
 		List<Corona_case> corona_cases = new ArrayList<Corona_case>();
 		
@@ -134,7 +134,7 @@ public class DB_Managment {
 	// return corona cases of specific region 
 	// if null is given it will return corona cases of all regions ( morroco )
 	
-	public static List region_show(String region_name) {
+	public static List<Corona_case> region_show(String region_name) {
 		
 		List<Corona_case> corona_cases = new ArrayList<Corona_case>();
 		
@@ -211,7 +211,7 @@ public class DB_Managment {
 	
 	// return corona statistic of morroco
 	
-public static Statistic morroco_statistics() {
+	public static Statistic morroco_statistics() {
 		
 		
 	    int v_confirmed = 0 ;
@@ -256,6 +256,10 @@ public static Statistic morroco_statistics() {
 	
 	}
 
+	//===============================================================================================================
+	
+	// calculate death_rate
+
 
 	private static int death_rate(int total_confirmed,int total_deaths,int total_recovered) {
 		
@@ -263,10 +267,135 @@ public static Statistic morroco_statistics() {
 		
 	}
 	
+	//===============================================================================================================
+	
+	// calculate recovery_rate
+	
+	
 	private static int recovery_rate(int total_confirmed,int total_deaths,int total_recovered) {
 		
 		return ( total_recovered * 100 ) / total_confirmed;
 	}
+	
+	//===============================================================================================================
+	
+	// get the name of all regions
+	
+	
+public static List<String> all_regions() {
+		
+		
+	List<String> regions_name = new ArrayList<String>();
+		
+	    try {
+			
+			CallableStatement cstmt;
+			cstmt = conn.prepareCall("{? = call get_regions()}");
+			cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+	        cstmt.executeUpdate();
+	        
+	        ResultSet cursor = (ResultSet) cstmt.getObject(1);
+	        
+	        while(cursor.next()) {
+
+	        	
+	        	regions_name.add((String) cursor.getObject(1));
+	        	
+	        }
+        
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+    
+	return regions_name;
+	
+	}
+	
+
+	//===============================================================================================================
+	
+	// return corona statistic of morroco
+
+	public static List<Statistic> cities_statistics() {
+		
+		String city_name = "";
+		int v_confirmed = 0 ;
+	    int v_deaths = 0 ;
+	    int v_recovered = 0 ;
+	    
+	    Statistic city_stats;
+	    
+		List<Statistic> cities_stats = new ArrayList<Statistic>();
+		
+	    try {
+			
+			CallableStatement cstmt;
+			cstmt = conn.prepareCall("{? = call city_statistic()}");
+			cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+	        cstmt.executeUpdate();
+	        
+	        ResultSet cursor = (ResultSet) cstmt.getObject(1);
+	        
+	        while(cursor.next()) {
+	
+	        	city_name = (String) cursor.getObject(1);
+	        	v_confirmed = ((BigDecimal)cursor.getObject(2)).intValue();
+	        	v_deaths = ((BigDecimal)cursor.getObject(3)).intValue();
+	        	v_recovered = ((BigDecimal)cursor.getObject(4)).intValue();
+	        	
+	        	city_stats = new Statistic(city_name,v_confirmed,v_deaths,v_recovered);
+	        	
+	        	cities_stats.add(city_stats);
+	        	
+	        }
+	    
+	} catch (SQLException e) {
+	
+		e.printStackTrace();
+	}
+	
+	return cities_stats;
+	
+	}
+	
+	
+	
+	//===============================================================================================================
+	
+	// get the name of all cities
+	
+	
+	public static List<String> all_cities() {
+			
+			
+		List<String> regions_name = new ArrayList<String>();
+			
+		    try {
+				
+				CallableStatement cstmt;
+				cstmt = conn.prepareCall("{? = call get_cities()}");
+				cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+		        cstmt.executeUpdate();
+		        
+		        ResultSet cursor = (ResultSet) cstmt.getObject(1);
+		        
+		        while(cursor.next()) {
+	
+		        	
+		        	regions_name.add((String) cursor.getObject(1));
+		        	
+		        }
+	        
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		}
+	    
+		return regions_name;
+		
+		}
+	
 	
 
 }

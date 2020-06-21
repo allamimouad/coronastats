@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +23,11 @@
   <link href="libb/font-awesome/css/font-awesome.css" rel="stylesheet" >
   <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css"/>
   <link rel="stylesheet" type="text/css" href="libb/gritter/css/jquery.gritter.css" >
+  
+  <!-- cities CSS and JS ( for cities table || for search with auto comlete ) -->
+  <link rel="stylesheet" type="text/css" href="css/cities/cities.css"/>
+  <script src="css/cities/cities.js"></script>
+  
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
@@ -62,7 +68,7 @@
     
       <!--   menu.html   -->
       
-      <%@ include file="includs/menu.jsp" %>
+      <%@ include file="includs/menu.jsp" %> 
 
     <!--sidebar end-->
 

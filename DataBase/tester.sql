@@ -92,11 +92,17 @@ DECLARE
         c_deaths NUMBER,
         c_recovered NUMBER
     ); 
+    
+    TYPE names IS RECORD(
+        c_name   VARCHAR2(50)
+    ); 
  
     
     c_city_info sys_refcursor; 
     v_corona_case record_corona_case;
     v_statistic record_statistic ;
+    
+    v_name names;
     
 BEGIN 
 
@@ -105,17 +111,19 @@ BEGIN
    --c_city_info := show_region(); 
    
    --c_city_info := morroco_statistic();
-   
    /*
+   c_city_info := get_regions();
+   
+   
    LOOP
-        FETCH c_city_info INTO v_statistic;
+        FETCH c_city_info INTO v_name;
         EXIT WHEN c_city_info%notfound;
         --dbms_output.put_line(v_corona_case.c_date || ': ' ||v_corona_case.c_confirmed);
-        dbms_output.put_line(v_statistic.c_confirmed || ': ' || v_statistic.c_deaths || ': ' || v_statistic.c_recovered );
+        --dbms_output.put_line(v_statistic.c_confirmed || ': ' || v_statistic.c_deaths || ': ' || v_statistic.c_recovered );
+        dbms_output.put_line( v_name.c_name );
     END LOOP;
    */
    
-   /*
    
    insert_corona_case_to_a_city('El Jadida','10-06-2020',4,22,33);
    insert_corona_case_to_a_city('El Jadida','11-06-2020',4,22,33);
@@ -123,10 +131,12 @@ BEGIN
    insert_corona_case_to_a_city('El Jadida','13-06-2020',4,22,33);
    insert_corona_case_to_a_city('El Jadida','14-06-2020',4,22,33);
    insert_corona_case_to_a_city('El Jadida','15-06-2020',4,22,33);
-   
-   */
-   
    insert_corona_case_to_a_city('El Jadida','16-06-2020',200,22,0);
+   
+   
+   
+   
+   
    
 END;
 
@@ -159,9 +169,14 @@ BEGIN
 END;
 
 
-SELECT co.c_date , SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered) 
-FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
-group by co.c_date;
 
+
+SELECT SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered) 
+FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co ;
+
+
+SELECT c.c_name ,SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered)  
+FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+group by c.c_name ;
 
 
