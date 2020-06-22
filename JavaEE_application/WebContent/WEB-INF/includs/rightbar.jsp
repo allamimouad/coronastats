@@ -59,7 +59,7 @@
             
             
             <!-- Rancked cities by confirmed -->
-            <h4 class="centered mt">Siba9 corona liwsal lawal yarba7</h4>
+            <h4 class="centered mt">most confirmed cases</h4>
             
             
 			<c:forEach items="${ cities_ranked }" var="city_ranked">
