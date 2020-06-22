@@ -42,7 +42,7 @@
           <c:if test="${ sessionScope.admin_conected == true }">
           
           <li>
-            <a href="google_maps.html">
+            <a href="${pageContext.request.contextPath}/Add_Cases">
               <i class="fa fa-plus"></i>
               <span>add new cases</span>
               </a>

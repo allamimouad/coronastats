@@ -19,7 +19,7 @@ end ;
 
 
 
--- return a cursors contain the corona cases of a specific region 
+-- return a cursors contain the corona cases of a specific region  show_region()
 
 CREATE OR REPLACE FUNCTION show_region (region_name VARCHAR DEFAULT '00default@@')
    return sys_refcursor
@@ -57,18 +57,61 @@ end ;
 
 -- add day_corona_case to specific city
 
-CREATE OR REPLACE PROCEDURE insert_corona_case_to_a_city (v_city_name IN VARCHAR , v_date IN DATE , v_confirmed IN NUMBER , v_deaths IN NUMBER , v_recovered IN NUMBER )
+CREATE OR REPLACE PROCEDURE insert_corona_case_to_a_city (v_city_name IN VARCHAR , v_confirmed IN NUMBER , v_deaths IN NUMBER , v_recovered IN NUMBER )
 is
+
+    added NUMBER;
+
 BEGIN
     
-    INSERT INTO TABLE (
+    added := today_is_added( v_city_name );
+    
+    IF added = 0 THEN
+    
+        INSERT INTO TABLE (
                         SELECT c.c_corona_cases
                         FROM region r, TABLE(r.c_cities) c 
                         WHERE c.c_name = v_city_name 
                         )
-    VALUES ( corona_case( v_date , v_confirmed , v_deaths , v_recovered ) );
-
+        VALUES ( corona_case( TO_DATE( CURRENT_DATE ) , v_confirmed , v_deaths , v_recovered ) );
+      
+    ELSE
+    
+        UPDATE TABLE (
+                        SELECT c.c_corona_cases
+                        FROM region r, TABLE(r.c_cities) c 
+                        WHERE c.c_name = v_city_name 
+                        )
+        set c_confirmed = v_confirmed , c_deaths = v_deaths , c_recovered = v_recovered
+        where c_date = TO_DATE( CURRENT_DATE );
+          
+    END IF;
+    
+    
 END;
+
+
+
+
+-- return if corona case for the current day is added or not
+
+
+CREATE OR REPLACE FUNCTION today_is_added( city_name VARCHAR )
+
+   return NUMBER
+is
+     
+    added  NUMBER; 
+begin
+   
+        SELECT count( co.c_date ) INTO added
+        FROM region r, TABLE(r.c_cities) c , TABLE(c.c_corona_cases) co
+        WHERE c.c_name = city_name and TO_DATE( co.c_date ) = TO_DATE( current_date ) ;
+
+   return added;
+end ;
+
+
 
 
 -- return a morroco statistic

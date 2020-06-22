@@ -425,7 +425,36 @@ public static List<String> all_regions() {
     
 	return false;
 	
-	}	
+	}
+
+	
+	//  ===============================================================================================================
+	
+	// this function insert new corona case or update one
+	
+	public static void insert_corona_case_to_a_city( String v_city_name , int v_confirmed , int v_deaths , int v_recovered ) {
+		
+		
+	    try {
+			
+			CallableStatement cstmt;
+			cstmt = conn.prepareCall("{call insert_corona_case_to_a_city(?,?,?,?)}");
+			cstmt.setString(1, v_city_name);
+	        cstmt.setInt(2, v_confirmed);
+	        cstmt.setInt(3, v_deaths);
+	        cstmt.setInt(4, v_recovered);
+	        cstmt.executeUpdate();
+
+
+        
+		} catch (SQLException e) {
+	
+			e.printStackTrace();
+		}
+
+
+	}
+	
 	
 
 }

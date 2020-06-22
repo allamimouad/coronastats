@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,7 +98,7 @@
 		<div class="container-table100">
 			<div class="wrap-table100">
 				<div class="table100">
-					<form>
+					<form method="post" action="${pageContext.request.contextPath}/Add_Cases" >
 					<table>
 						<thead>
 							<tr class="table100-head">
@@ -108,27 +109,19 @@
 								
 							</tr>
 						</thead>
-						<tbody>.
+						<tbody>
 						
+						<c:forEach items="${ cities_name }" var="city_name" begin="0" end="0">
+                        
 							<tr>
-                                <td>Tanger-Assilah</td>
-                                <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
+                            <td>${ city_name }</td>
+                            <td><input name="${ city_name }_confirmed" type="text"></td>
+                            <td><input name="${ city_name }_recovered" type="text"></td>
+                            <td><input name="${ city_name }_deaths" type="text"></td>
                             </tr>
-                            <tr>
-                                <td>M'diq-Fnidèq</td>
-                                <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            </tr>
-    
-                                <tr>
-                                    <td>Assouerd</td>
-                                    <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                                </tr>
+
+						</c:forEach>
+                                
             </tbody>
             </table>
             <button class="add_save" type="submit" value="Save">Save</button>

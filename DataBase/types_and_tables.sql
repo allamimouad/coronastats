@@ -26,6 +26,7 @@ CREATE TABLE admin(
     c_pass   VARCHAR2(80)
     );
    
+   
  /*     
 TYPE record_corona_case IS RECORD(
     c_date DATE,

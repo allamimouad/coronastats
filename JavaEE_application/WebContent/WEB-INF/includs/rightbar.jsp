@@ -1,7 +1,7 @@
           <div class="col-lg-3 ds">
             <!--COMPLETED ACTIONS DONUTS CHART-->
             <div class="donut-main">
-              <h4>COMPLETED ACTIONS & PROGRESS</h4>
+              <h4>Morocco</h4>
               <canvas id="newchart" height="130" width="130"></canvas>
               <script>
                 var doughnutData = [
@@ -57,7 +57,7 @@
               </p>
             </div>
             <!-- RECENT ACTIVITIES SECTION -->
-            <h4 class="centered mt">RECENT ACTIVITY</h4>
+            <h4 class="centered mt">Siba9 corona liwsal lawal yarba7</h4>
             <!-- First Activity -->
             <div class="desc">
               <div class="thumb">
