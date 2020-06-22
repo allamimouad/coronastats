@@ -398,4 +398,34 @@ public static List<String> all_regions() {
 	
 	
 
+	//  ===============================================================================================================
+	
+	// this function check the login 
+	
+	public static boolean check_admin(String name ,String password) {
+		
+		
+	    try {
+			
+			CallableStatement cstmt;
+			cstmt = conn.prepareCall("{? = call check_login(?,?)}");
+			cstmt.registerOutParameter(1, OracleTypes.NUMBER);
+	        cstmt.setString(2, name);
+	        cstmt.setString(3, password);
+	        cstmt.executeUpdate();
+	        
+	        return cstmt.getInt(1)==0 ? false : true;
+	        
+	        
+        
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+    
+	return false;
+	
+	}	
+	
+
 }

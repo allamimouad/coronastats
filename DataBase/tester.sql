@@ -104,6 +104,8 @@ DECLARE
     
     v_name names;
     
+    conected NUMBER;
+    
 BEGIN 
 
    --c_city_info := show_city('Oued Ed Dahab'); 
@@ -124,7 +126,7 @@ BEGIN
     END LOOP;
    */
    
-   
+   /*
    insert_corona_case_to_a_city('El Jadida','10-06-2020',4,22,33);
    insert_corona_case_to_a_city('El Jadida','11-06-2020',4,22,33);
    insert_corona_case_to_a_city('El Jadida','12-06-2020',4,22,33);
@@ -133,10 +135,11 @@ BEGIN
    insert_corona_case_to_a_city('El Jadida','15-06-2020',4,22,33);
    insert_corona_case_to_a_city('El Jadida','16-06-2020',200,22,0);
    
+   */
    
    
-   
-   
+   conected := check_login('admin' ,'admin');
+   dbms_output.put_line( conected );
    
 END;
 
@@ -171,12 +174,6 @@ END;
 
 
 
-SELECT SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered) 
-FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co ;
-
-
-SELECT c.c_name ,SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered)  
-FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
-group by c.c_name ;
-
-
+SELECT COUNT(*)
+FROM admin
+where c_name = 'sasa' and c_pass = 'sasa' ;

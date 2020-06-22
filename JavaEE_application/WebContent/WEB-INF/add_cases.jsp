@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +26,6 @@
   <!-- cities CSS and JS ( for cities table || for search with auto comlete ) -->
   <link rel="stylesheet" type="text/css" href="css/cities/cities.css"/>
   <script src="css/cities/cities.js"></script>
-  
   
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet">
@@ -87,37 +85,65 @@
               <div class="border-head">
                 <h3>USER VISITS</h3>
               </div>
-				
-				<!-- cities table -->
-				
-				
 
-        <table class="avectri zebre tableau">
-            <thead>
-            <tr>
-                <th>Cities</th>
-                <th data-tri="1" class="selection" data-type="num">Confirmed Cases</th>
-                <th data-tri="1" class="selection" data-type="num">Recovered Cases</th>
-                <th data-tri="1" class="selection" data-type="num">Deaths</th>
-                <!-- <th  data-tri="1" class="selection" data-type="num"></th> -->
-            </tr>
-            </thead>
-            <tbody>
-            
-            	<c:forEach items="${ cities_stats }" var="city_stats">
-            
-                    <tr>
-                    	<td><a href="${pageContext.request.contextPath}/home?type=city&name=${ city_stats.c_name } "> ${ city_stats.c_name } </a></td>
-                        <td>${ city_stats.c_confirmed }</td>
-                        <td>${ city_stats.c_recovered }</td>
-                        <td>${ city_stats.c_deaths }</td>
-                    </tr>
-                    
-             	</c:forEach>
-                    
+
+
+				<!-- start add new cases  -->
+				
+				
+				
+				
+				<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<form>
+					<table>
+						<thead>
+							<tr class="table100-head">
+								<th class="column1">Cities</th>
+								<th class="column2">Confirmed Cases</th>
+								<th class="column3">Recovered Cases</th>
+								<th class="column4">Deaths</th>
+								
+							</tr>
+						</thead>
+						<tbody>.
+						
+							<tr>
+                                <td>Tanger-Assilah</td>
+                                <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>M'diq-Fnidèq</td>
+                                <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            </tr>
+    
+                                <tr>
+                                    <td>Assouerd</td>
+                                    <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                                </tr>
             </tbody>
-        </table>
+            </table>
+            <button class="add_save" type="submit" value="Save">Save</button>
+        </form>
+				</div>
+			</div>
+		</div>
+	</div>
+				
+				
+				
+				
+				<!-- end add new cases -->
 
+             
 
             <!--custom chart end-->
 

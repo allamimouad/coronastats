@@ -7,7 +7,7 @@
       <!--logo end-->
       <div class="nav notify-row searchxx" id="top_menu">
       
-      <form autocomplete="off" action="${pageContext.request.contextPath}">
+      <form autocomplete="off" action="${pageContext.request.contextPath}/home">
 	        <ul class="nav pull-right top-menu">
 	          <li><input id="myInput" type="text" name="name" placeholder="City Search"></li>
 	          <input type="hidden" id="custId" name="type" value="city">
@@ -46,11 +46,15 @@
         </script>
         
       </div>
-      <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login.html">Logout</a></li>
-        </ul>
-      </div>
+      
+      <c:if test="${ sessionScope.admin_conected == true }">
+      
+		<div class="top-menu">
+	        <ul class="nav pull-right top-menu">
+	          <li><a class="logout" href="${pageContext.request.contextPath}/login?logout=yes">Logout</a></li>
+	        </ul>
+		</div>
 
+		</c:if>
       
     </header>

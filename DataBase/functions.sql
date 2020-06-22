@@ -145,3 +145,20 @@ begin
    return cur;
 end ;
 
+
+-- check login
+
+CREATE OR REPLACE FUNCTION check_login(admin_name VARCHAR ,admin_pass VARCHAR)
+
+   return NUMBER
+is
+    connected NUMBER;
+begin
+    
+    SELECT COUNT(*) INTO connected
+    FROM admin
+    where c_name = admin_name and c_pass = admin_pass;
+
+   return connected;
+end ;
+

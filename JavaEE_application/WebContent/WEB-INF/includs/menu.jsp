@@ -3,10 +3,16 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
+        
+        <c:if test="${ sessionScope.admin_conected == true }">
+        
           <p class="centered"><a href="profile.html"><img src="img/ui-sam.jpg" class="img-circle" width="80"></a></p>
-          <h5 class="centered">Sam Soffes</h5>
+          <h5 class="centered">Admin</h5>
+          
+         </c:if>
+         
           <li class="mt">
-            <a class="active" href="${pageContext.request.contextPath}">
+            <a class="active" href="${pageContext.request.contextPath}/home">
               <i class="fa fa-dashboard"></i>
               <span>morocco Stat</span>
               </a>
@@ -20,7 +26,7 @@
             
             <c:forEach items="${ regions_name }" var="region_name">
                         
-             	<li><a href="${pageContext.request.contextPath}?type=region&name=${ region_name } ">${ region_name }</a></li>
+             	<li><a href="${pageContext.request.contextPath}/home?type=region&name=${ region_name } ">${ region_name }</a></li>
                         
             </c:forEach>
 
@@ -32,12 +38,18 @@
               <span>cities</span>
               </a>
           </li>
+          
+          <c:if test="${ sessionScope.admin_conected == true }">
+          
           <li>
             <a href="google_maps.html">
               <i class="fa fa-plus"></i>
               <span>add new cases</span>
               </a>
           </li>
+          
+          </c:if>
+          
           <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-th"></i>

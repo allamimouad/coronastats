@@ -20,6 +20,12 @@ CREATE TABLE region (
   NESTED TABLE c_cities STORE AS cities_tab
    (NESTED TABLE c_corona_cases STORE AS corona_cases_tab);
    
+   
+CREATE TABLE admin(
+    c_name   VARCHAR2(50),
+    c_pass   VARCHAR2(80)
+    );
+   
  /*     
 TYPE record_corona_case IS RECORD(
     c_date DATE,
