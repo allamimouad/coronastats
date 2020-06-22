@@ -51,23 +51,28 @@ public class Home extends HttpServlet {
 			
 		}
 		
-		// for the main graph
+			// for the main graph
 		
 		request.setAttribute("corona_cases", corona_cases);
 		
 		
-		// for the right bar graph
+			// for the right bar graph
 		Statistic morroco_statistic = DB_Managment.morroco_statistics();
 		request.setAttribute("morroco_statistic", morroco_statistic);
 		
 		
-		// for the left menu
+			// for the left menu
 		List<String> regions_name = DB_Managment.all_regions();
 		request.setAttribute("regions_name", regions_name);
 		
-		// for the search
+			// for the search
 		List<String> cities_name = DB_Managment.all_cities();
 		request.setAttribute("cities_name", cities_name);
+		
+		
+			// for rancked cities in the right bar
+		List<Statistic> cities_ranked = DB_Managment.cities_statistics_with_limit(5);
+		request.setAttribute("cities_ranked", cities_ranked);
 		
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward( request , response );

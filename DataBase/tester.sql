@@ -185,46 +185,19 @@ END;
 
 
 
-
-SELECT COUNT(*)
-FROM admin
-where c_name = 'sasa' and c_pass = 'sasa' ;
-
-
-
-INSERT INTO TABLE (
-                        SELECT c.c_corona_cases
-                        FROM region r, TABLE(r.c_cities) c 
-                        WHERE c.c_name = 'El Jadida'
-                        )
-VALUES ( corona_case( TO_DATE( CURRENT_DATE ) , 1 , 1 , 2 ) );
-
-INSERT INTO TABLE (
-                        SELECT c.c_corona_cases
-                        FROM region r, TABLE(r.c_cities) c 
-                        WHERE c.c_name = 'El Jadida'
-                        )
-VALUES ( corona_case( '21/06/2020' , 1 , 1 , 2 ) );
-
-
-
-
-UPDATE TABLE (
-                        SELECT c.c_corona_cases
-                        FROM region r, TABLE(r.c_cities) c 
-                        WHERE c.c_name = 'El Jadida' 
-                        )
-set c_confirmed = 99
-where c_date = TO_DATE( CURRENT_DATE );
-
-
-UPDATE TABLE (
-                        SELECT c.c_corona_cases
-                        FROM region r, TABLE(r.c_cities) c 
-                        WHERE c.c_name = 'El Jadida' 
-                        )
-set c_confirmed = v_confirmed , c_deaths = v_deaths , c_recovered = v_recovered
-where c_date = TO_DATE( CURRENT_DATE );
+SELECT * FROM(
+                SELECT c.c_name ,SUM(co.c_confirmed) c_confirmed ,SUM(co.c_deaths) c_deaths ,SUM(co.c_recovered) c_recovered  
+                FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+                group by c.c_name )
         
-        
+ORDER BY c_confirmed DESC
+FETCH FIRST 5 ROWS ONLY;
+
+
+
+
+
+
+
+
         

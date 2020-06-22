@@ -315,7 +315,7 @@ public static List<String> all_regions() {
 
 	//===============================================================================================================
 	
-	// return corona statistic of morroco
+	// return corona statistic of all cities in morroco
 
 	public static List<Statistic> cities_statistics() {
 		
@@ -454,6 +454,59 @@ public static List<String> all_regions() {
 
 
 	}
+	
+	
+	
+	
+	//===============================================================================================================
+	
+	// return corona statistic of cities in morroco with limit
+	// right bar , cities rank order by confirmed
+
+	public static List<Statistic> cities_statistics_with_limit(int v_limit) {
+		
+		String city_name = "";
+		int v_confirmed = 0 ;
+	    int v_deaths = 0 ;
+	    int v_recovered = 0 ;
+	    
+	    Statistic city_stats;
+	    
+		List<Statistic> cities_stats = new ArrayList<Statistic>();
+		
+	    try {
+			
+			CallableStatement cstmt;
+			cstmt = conn.prepareCall("{? = call city_statistic(?)}");
+			cstmt.registerOutParameter(1, OracleTypes.CURSOR);
+			cstmt.setInt(2, v_limit);
+	        cstmt.executeUpdate();
+	        
+	        ResultSet cursor = (ResultSet) cstmt.getObject(1);
+	        
+	        while(cursor.next()) {
+	
+	        	city_name = (String) cursor.getObject(1);
+	        	v_confirmed = ((BigDecimal)cursor.getObject(2)).intValue();
+	        	v_deaths = ((BigDecimal)cursor.getObject(3)).intValue();
+	        	v_recovered = ((BigDecimal)cursor.getObject(4)).intValue();
+	        	
+	        	city_stats = new Statistic(city_name,v_confirmed,v_deaths,v_recovered);
+	        	
+	        	cities_stats.add(city_stats);
+	        	
+	        }
+	    
+	} catch (SQLException e) {
+	
+		e.printStackTrace();
+	}
+	
+	return cities_stats;
+	
+	}
+	
+	
 	
 	
 

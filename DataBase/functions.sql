@@ -151,9 +151,11 @@ end ;
 
 
 
--- return statistic of a specific city
+-- return statistic of a specific city 
+--( the limit variable is used when we want to call ranked cities by active cases )
+-- DEFAULT 2000 will never be reached
 
-CREATE OR REPLACE FUNCTION city_statistic
+CREATE OR REPLACE FUNCTION city_statistic(v_limit NUMBER DEFAULT 2000)
 
    return sys_refcursor
 is
@@ -162,9 +164,14 @@ is
 begin
    
         open cur for
-            SELECT c.c_name ,SUM(co.c_confirmed) ,SUM(co.c_deaths) ,SUM(co.c_recovered)  
-            FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
-            group by c.c_name ;
+            SELECT * FROM(
+                            SELECT c.c_name ,SUM(co.c_confirmed) c_confirmed ,SUM(co.c_deaths) c_deaths ,SUM(co.c_recovered) c_recovered  
+                            FROM region r, TABLE(r.c_cities) c, TABLE(c.c_corona_cases) co 
+                            group by c.c_name )
+                            
+            ORDER BY c_confirmed DESC
+            FETCH FIRST v_limit ROWS ONLY;
+            
 
    return cur;
 end ;

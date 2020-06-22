@@ -34,6 +34,7 @@ public class City extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+			// for table of cities
 		
 		List<Statistic> cities_stats = DB_Managment.cities_statistics();
 		request.setAttribute("cities_stats", cities_stats);
@@ -53,6 +54,12 @@ public class City extends HttpServlet {
 		// for the search
 		List<String> cities_name = DB_Managment.all_cities();
 		request.setAttribute("cities_name", cities_name);
+		
+		
+			// for rancked cities in the right bar
+		
+		List<Statistic> cities_ranked = DB_Managment.cities_statistics_with_limit(5);
+		request.setAttribute("cities_ranked", cities_ranked);
 		
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/city.jsp").forward( request , response );

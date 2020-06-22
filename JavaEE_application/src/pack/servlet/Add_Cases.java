@@ -54,9 +54,13 @@ public class Add_Cases extends HttpServlet {
 		// for the search
 		List<String> cities_name = DB_Managment.all_cities();
 		request.setAttribute("cities_name", cities_name);
+		
+		
+			// for rancked cities in the right bar
+		List<Statistic> cities_ranked = DB_Managment.cities_statistics_with_limit(5);
+		request.setAttribute("cities_ranked", cities_ranked);
 
-		//this.getServletContext().getRequestDispatcher("/WEB-INF/add_cases.jsp").forward( request , response );
-		response.getWriter().append("Served at: " + session);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/add_cases.jsp").forward( request , response );
 	}
 
 

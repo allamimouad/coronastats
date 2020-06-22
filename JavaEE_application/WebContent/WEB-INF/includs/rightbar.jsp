@@ -56,58 +56,27 @@
 	              <span class="dott68"></span>&nbsp;recovered&nbsp;${ morroco_statistic.c_recovered }%
               </p>
             </div>
-            <!-- RECENT ACTIVITIES SECTION -->
+            
+            
+            <!-- Rancked cities by confirmed -->
             <h4 class="centered mt">Siba9 corona liwsal lawal yarba7</h4>
-            <!-- First Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>Just Now</muted>
-                  <br/>
-                  <a href="#">Paul Rudd</a> purchased an item.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- Second Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>2 Minutes Ago</muted>
-                  <br/>
-                  <a href="#">James Brown</a> subscribed to your newsletter.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- Third Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>3 Hours Ago</muted>
-                  <br/>
-                  <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
-                </p>
-              </div>
-            </div>
-            <!-- Fourth Activity -->
-            <div class="desc">
-              <div class="thumb">
-                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-              </div>
-              <div class="details">
-                <p>
-                  <muted>7 Hours Ago</muted>
-                  <br/>
-                  <a href="#">Brando Page</a> purchased a year subscription.<br/>
-                </p>
-              </div>
-            </div>
+            
+            
+			<c:forEach items="${ cities_ranked }" var="city_ranked">
+            
+	            <div class="desc">
+	              <div class="thumb">
+	                <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+	              </div>
+	              <div class="details">
+	                <p>
+	                  <muted>confirmed : ${ city_ranked.c_confirmed }</muted>
+	                  <br/>
+	                  <a href="#">${ city_ranked.c_name }</a><br/>
+	                </p>
+	              </div>
+	            </div>
+            
+			</c:forEach> 
+            
           </div>
